@@ -1,0 +1,17 @@
+from tensorflow.keras.preprocessing import image_dataset_from_directory
+from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
+import numpy as np
+from tensorflow.keras.preprocessing import image as tf_image
+import pprint
+
+target_img = tf_image.load_img('enter your favorite img',target_size(Num,Num))
+#img_format to img_array
+target_img_array = tf_image.img_to_array(target_img)[tf.newaxis]
+#nnormalization
+target_img_array = tf.keras.applications.mobilenet_v2.preprocess_input(target_img_array)
+
+mobile_model = tf.keras.applications.mobilenet_v2.MobileNetV2(weights='imagenet')
+image_classification = mobile_model.predict(target_img_array)
+result = tf.keras.applications.mobilenet.decode_predictions(image_classification,top=5)
+pprint.pprint(result)
